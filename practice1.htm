@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+    @author   Stephen Adams <stephen.adams5@mohawkcollege.ca
+    @purpose  Client side code for COMP 10260 PHP practice exercises set 1
+    @revision 2023.35.0
+--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Stephen Adams">  
+    <meta name="description" content="Starter code for COMP 10260 Problem Solving Exercises">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Problem Solving in PHP Starter Code</title>
+
+    <link href="practice1/bootstrap.min.css" rel="stylesheet">
+    <script src="Problem%20Solving%20in%20PHP%20Starter%20Code_files/bootstrap.bundle.min.js"></script>
+
+    <script>
+        /**
+         * @param fn    the php file name that will be called by fetch
+         * @param id    a CSS selector that the output will be published to
+         * @param in1   the input value to be sent as GET parameter inputvar1
+         * @param in2   the input value to be sent as GET parameter inputvar2
+         */
+        function runPHP( fn, id, in1, in2 ) {
+            fetch( fn+"?inputvar1="+in1+"&inputvar2="+in2 ).then( response => {
+                                if ( !response.ok ) { throw new Error(response.status+" "+response.statusText) }
+                                else { return response.text(); }
+                            } )
+                       .then( data => {document.querySelector(id).textContent=data} )
+                       .catch( error => {document.querySelector(id).textContent=error} );
+        }
+    </script>
+
+    <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+      </style>
+  
+
+</head>
+
+<body>
+    <header>
+        <!-- based on https://getbootstrap.com/docs/5.0/examples/album/# -->
+        <div class="collapse bg-dark" id="navbarHeader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-7 py-4">
+                        <h4 class="text-white">Problem Solving in PHP</h4>
+                        <p class="text-secondary">Use this starter HTML file to call your PHP solutions to the exercise posted
+                            on the LMS. Bring your questions about the solutions to the course discussion group or to the class.
+                            Googling up and reading an answer doesn't really help you reinforce the problem solving skills you
+                            are trying to learn. Instead, go back to basics, figure it out in pseudocode comments in your file.
+                            If you're stuck on syntax, google that.</p>
+                    </div>
+                    <div class="col-sm-4 offset-md-1 py-4">
+                        <h4 class="text-white">Resources</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="https://www.w3schools.com/php/default.asp" class="text-white">w3Schools PHP</a></li>
+                            <li><a href="https://php.net/" class="text-white">PHP Documentation</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container">
+                <a href="#" class="navbar-brand d-flex align-items-center">
+                <!-- source: https://www.svgrepo.com/svg/129935/keyboard -->
+                <svg fill="#FFFFFF" height="30px" width="40px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 0 297.887 297.887" xml:space="preserve">
+                    <g>
+                    <path d="M31.271,153.588h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C28.5,152.347,29.741,153.588,31.271,153.588z"></path>
+                    <path d="M31.271,172.941h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C28.5,171.7,29.741,172.941,31.271,172.941z"></path>
+                    <path d="M31.271,192.293h8.533c1.53,0,2.771-1.24,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.241-2.771,2.771v8.533C28.5,191.053,29.741,192.293,31.271,192.293z"></path>
+                    <path d="M55.389,153.588h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.241-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C52.618,152.347,53.859,153.588,55.389,153.588z"></path>
+                    <path d="M55.389,172.941h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.241-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C52.618,171.7,53.859,172.941,55.389,172.941z"></path>
+                    <path d="M66.693,189.523v-8.533c0-1.53-1.241-2.771-2.771-2.771h-8.533c-1.53,0-2.771,1.241-2.771,2.771v8.533
+                        c0,1.53,1.24,2.771,2.771,2.771h8.533C65.453,192.293,66.693,191.053,66.693,189.523z"></path>
+                    <path d="M79.507,153.588h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C76.736,152.347,77.977,153.588,79.507,153.588z"></path>
+                    <path d="M79.507,172.941h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C76.736,171.7,77.977,172.941,79.507,172.941z"></path>
+                    <path d="M79.507,192.293h8.533c1.53,0,2.771-1.24,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.241-2.771,2.771v8.533C76.736,191.053,77.977,192.293,79.507,192.293z"></path>
+                    <path d="M103.625,153.588h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.241-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C100.854,152.347,102.095,153.588,103.625,153.588z"></path>
+                    <path d="M103.625,172.941h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.241-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C100.854,171.7,102.095,172.941,103.625,172.941z"></path>
+                    <path d="M103.625,192.293h8.533c1.53,0,2.771-1.24,2.771-2.771v-8.533c0-1.53-1.241-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.241-2.771,2.771v8.533C100.854,191.053,102.095,192.293,103.625,192.293z"></path>
+                    <path d="M127.743,153.588h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C124.972,152.347,126.213,153.588,127.743,153.588z"></path>
+                    <path d="M127.743,172.941h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C124.972,171.7,126.213,172.941,127.743,172.941z"></path>
+                    <path d="M127.743,192.293h8.533c1.53,0,2.771-1.24,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.241-2.771,2.771v8.533C124.972,191.053,126.213,192.293,127.743,192.293z"></path>
+                    <path d="M151.861,153.588h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C149.09,152.347,150.331,153.588,151.861,153.588z"></path>
+                    <path d="M151.861,172.941h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C149.09,171.7,150.331,172.941,151.861,172.941z"></path>
+                    <path d="M151.861,192.293h8.533c1.53,0,2.771-1.24,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.241-2.771,2.771v8.533C149.09,191.053,150.331,192.293,151.861,192.293z"></path>
+                    <path d="M184.512,139.513h-8.533c-1.53,0-2.771,1.24-2.771,2.771v8.533c0,1.53,1.24,2.771,2.771,2.771h8.533
+                        c1.53,0,2.771-1.241,2.771-2.771v-8.533C187.283,140.753,186.042,139.513,184.512,139.513z"></path>
+                    <path d="M184.512,158.866h-8.533c-1.53,0-2.771,1.24-2.771,2.771v8.533c0,1.53,1.24,2.771,2.771,2.771h8.533
+                        c1.53,0,2.771-1.241,2.771-2.771v-8.533C187.283,160.106,186.042,158.866,184.512,158.866z"></path>
+                    <path d="M184.512,178.219h-8.533c-1.53,0-2.771,1.241-2.771,2.771v8.533c0,1.53,1.24,2.771,2.771,2.771h8.533
+                        c1.53,0,2.771-1.24,2.771-2.771v-8.533C187.283,179.459,186.042,178.219,184.512,178.219z"></path>
+                    <path d="M209.846,153.588h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C207.076,152.347,208.316,153.588,209.846,153.588z"></path>
+                    <path d="M209.846,172.941h8.533c1.53,0,2.771-1.241,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.24-2.771,2.771v8.533C207.076,171.7,208.316,172.941,209.846,172.941z"></path>
+                    <path d="M209.846,192.293h8.533c1.53,0,2.771-1.24,2.771-2.771v-8.533c0-1.53-1.24-2.771-2.771-2.771h-8.533
+                        c-1.53,0-2.771,1.241-2.771,2.771v8.533C207.076,191.053,208.316,192.293,209.846,192.293z"></path>
+                    <path d="M242.498,139.513h-8.533c-1.53,0-2.771,1.24-2.771,2.771v8.533c0,1.53,1.241,2.771,2.771,2.771h8.533
+                        c1.53,0,2.771-1.241,2.771-2.771v-8.533C245.268,140.753,244.028,139.513,242.498,139.513z"></path>
+                    <path d="M242.498,158.866h-8.533c-1.53,0-2.771,1.24-2.771,2.771v8.533c0,1.53,1.241,2.771,2.771,2.771h8.533
+                        c1.53,0,2.771-1.241,2.771-2.771v-8.533C245.268,160.106,244.028,158.866,242.498,158.866z"></path>
+                    <path d="M242.498,178.219h-8.533c-1.53,0-2.771,1.241-2.771,2.771v8.533c0,1.53,1.241,2.771,2.771,2.771h8.533
+                        c1.53,0,2.771-1.24,2.771-2.771v-8.533C245.268,179.459,244.028,178.219,242.498,178.219z"></path>
+                    <path d="M242.498,197.572h-32.651c-1.53,0-2.771,1.241-2.771,2.771v8.533c0,1.53,1.24,2.771,2.771,2.771h32.651
+                        c1.53,0,2.771-1.241,2.771-2.771v-8.533C245.268,198.812,244.028,197.572,242.498,197.572z"></path>
+                    <path d="M266.615,139.513h-8.533c-1.53,0-2.771,1.24-2.771,2.771v8.533c0,1.53,1.24,2.771,2.771,2.771h8.533
+                        c1.53,0,2.771-1.241,2.771-2.771v-8.533C269.386,140.753,268.146,139.513,266.615,139.513z"></path>
+                    <path d="M266.615,158.866h-8.533c-1.53,0-2.771,1.24-2.771,2.771v8.533c0,1.53,1.24,2.771,2.771,2.771h8.533
+                        c1.53,0,2.771-1.241,2.771-2.771v-8.533C269.386,160.106,268.146,158.866,266.615,158.866z"></path>
+                    <path d="M266.615,178.219h-8.533c-1.53,0-2.771,1.241-2.771,2.771v8.533c0,1.53,1.24,2.771,2.771,2.771h8.533
+                        c1.53,0,2.771-1.24,2.771-2.771v-8.533C269.386,179.459,268.146,178.219,266.615,178.219z"></path>
+                    <path d="M266.615,197.572h-8.533c-1.53,0-2.771,1.241-2.771,2.771v8.533c0,1.53,1.24,2.771,2.771,2.771h8.533
+                        c1.53,0,2.771-1.241,2.771-2.771v-8.533C269.386,198.812,268.146,197.572,266.615,197.572z"></path>
+                    <path d="M49.848,197.572H31.271c-1.53,0-2.771,1.241-2.771,2.771v8.533c0,1.53,1.24,2.771,2.771,2.771h18.576
+                        c1.53,0,2.771-1.241,2.771-2.771v-8.533C52.618,198.812,51.378,197.572,49.848,197.572z"></path>
+                    <path d="M184.512,197.572H66.898c-1.53,0-2.771,1.241-2.771,2.771v8.533c0,1.53,1.241,2.771,2.771,2.771h117.614
+                        c1.53,0,2.771-1.241,2.771-2.771v-8.533C187.283,198.812,186.042,197.572,184.512,197.572z"></path>
+                    <path d="M278.516,110.644H54.552c2.604-8.924,10.845-15.469,20.599-15.469h19.838c10.423,0,18.902-8.479,18.902-18.902
+                        s-8.479-18.902-18.902-18.902h-4.178c-3.313,0-6,2.687-6,6s2.687,6,6,6h4.178c3.806,0,6.902,3.096,6.902,6.902
+                        s-3.097,6.902-6.902,6.902H75.151c-16.406,0-30.083,11.869-32.919,27.469H19.371C8.689,110.644,0,119.334,0,130.015v91.129
+                        c0,10.681,8.689,19.371,19.371,19.371h259.145c10.682,0,19.371-8.69,19.371-19.371v-91.129
+                        C297.887,119.334,289.197,110.644,278.516,110.644z M285.887,221.144c0,4.064-3.307,7.371-7.371,7.371H19.371
+                        c-4.064,0-7.371-3.307-7.371-7.371v-91.129c0-4.064,3.307-7.371,7.371-7.371h259.145c4.064,0,7.371,3.307,7.371,7.371V221.144z"></path>
+                    </g>
+                </svg>
+                <strong>Practice Exercises</strong>
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+          </div>
+    </header>
+    
+    <main>
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">Solving These Examples</h1>
+                    <p class="lead text-secondary">Create each PHP file as described on the LMS.<br>Remember to load this file
+                        through your browser after you start your PHP Environment, not by double clicking the file from your OS
+                        folder.<br>This file expects to be in the same directory as your PHP solutions.</p>
+                </div>
+            </div>
+        </section>
+        <div class="py-5 bg-light">
+            <div class="container">
+                <!-- row 1 -->
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <!-- For each solution copy this block and change the appropriate elements -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text id="p1-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Temperature Converter</h3>
+                            <p class="card-text">
+                                Write a PHP script called "temperature_conversion.php" that converts a temperature (input1) from Fahrenheit to Celsius if input2 is true, and from Celsius to Farenheit if input2 is false.</p>
+                            <div class="input-group">
+                                <label for="q1-i1" class="form-label">Temperature</label>
+                                <input type="number" id="q1-i1" class="form-control mx-2" value="0.0">
+                                <label for="q1-i2" class="form-label">F to C</label>
+                                <input id="q1-i2" type="checkbox" checked="checked" class="form-check-input mx-2">
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <button onclick="runPHP('temperature_conversion.php', '#p1-sol',document.getElementById('q1-i1').value, document.getElementById('q1-i2').checked )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">math, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text id="p2-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Grade Calculator</h3>
+                            <p class="card-text">
+                                Write a PHP script called "grades.php" that takes a student's numerical grade as input1 and prints the corresponding letter grade based on the following scale:<br>90 and above: A<br>80 to 89: B<br>70 to 79: C<br>60 to 69: D<br>Below 60: F<br>
+                            </p>
+                            <div class="input-group">
+                                <label for="q2-i1" class="form-label">Grade</label>
+                                <input type="number" id="q2-i1" class="form-control mx-2" value="0.0">
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <button onclick="runPHP('grades.php', '#p2-sol',document.getElementById('q2-i1').value, null )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">math, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img"
+                                aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text id="p3-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+                            
+                            <div class="card-body">
+                                <h3>Even or Odd</h3>
+                                <p class="card-text">Write a PHP script called "even_or_odd.php" that takes an integer as input1 and determines if it is even or odd. Print the result accordingly.</p>
+                                <div class="input-group">
+                                    <label for="q3-i1" class="form-label">Integer</label>
+                                    <input type="number" id="q3-i1" class="form-control mx-2" value="0.0">
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button onclick="runPHP('even_or_odd.php', '#p3-sol',document.getElementById('q3-i1').value, null )"
+                                            type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                                    </div>
+                                    <small class="text-muted">math, conditions</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- row 2 -->
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <!-- For each solution copy this block and change the appropriate elements -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text id="p4-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Ticket Price Calculator</h3>
+                            <p class="card-text">Create a PHP script called "ticket_price.php" that calculates the ticket price for a movie based on the age (input1) of the viewer.<br>The rules are as follows:<br>Children (ages 0 to 5): Free<br>Youth (ages 6 to 17): $8<br>Adults (ages 18 to 64): $12<br>Seniors (ages 65 and above): $10</p>
+                            <div class="input-group">
+                                <label for="q4-i1" class="form-label">Age</label>
+                                <input type="number" id="q4-i1" class="form-control mx-2" value="0.0">
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <button onclick="runPHP('ticket_price.php', '#p4-sol',document.getElementById('q4-i1').value, null )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <!-- change the p id value to the question number -->
+                                <text id="p5-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Leap Year Checker</h3>
+                            <p class="card-text">Create a PHP script called "leap_year.php" that checks if a given year (input1) is a leap year or not.  A leap year is divisible by 4 but not by 100, except when it is divisible by 400.</p>
+                            <div class="input-group">
+                                <!-- change the q id value and prompt to the question number -->
+                                <label for="q5-i1" class="form-label">Year</label>
+                                <input type="number" id="q5-i1" class="form-control mx-2" value="2023">
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <!-- change the parameter values to match the q# above -->
+                            <button onclick="runPHP('leap_year.php', '#p5-sol',document.getElementById('q5-i1').value, null )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">math, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+      
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <!-- change the p id value to the question number -->
+                                <text id="p6-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Day of the Week</h3>
+                            <p class="card-text">Write a PHP script called "dow.php" that takes an integer (1 to 7) as input1 and prints the corresponding day of the week, where 1 represents Monday, 2 represents Tuesday, and so on.</p>
+                            <div class="input-group">
+                                <!-- change the q id value to the question number -->
+                                <label for="q6-i1" class="form-label">Day number</label>
+                                <input type="number" id="q6-i1" class="form-control mx-2" value="1" min="1" max="7">
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <!-- change the parameter values to match the q# above -->
+                            <button onclick="runPHP('dow.php', '#p6-sol',document.getElementById('q6-i1').value, null )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">math, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                
+                <!-- row 3 -->
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <!-- For each solution copy this block and change the appropriate elements -->
+   
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <!-- change the p id value to the question number -->
+                                <text id="p7-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Factorial Calculator</h3>
+                            <p class="card-text">Create a PHP script called "factorial.php" that calculates and prints the factorial of a given positive integer (input1).</p>
+                            <div class="input-group">
+                                <!-- change the q id value to the question number -->
+                                <label for="q7-i1" class="form-label">Integer</label>
+                                <input type="number" id="q7-i1" class="form-control mx-2" value="0.0">
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <!-- change the parameter values to match the q# above -->
+                            <button onclick="runPHP('factorial.php', '#p7-sol',document.getElementById('q7-i1').value, null )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">math, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <!-- change the p id value to the question number -->
+                                <text id="p8-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Multiplication Table Generator</h3>
+                            <p class="card-text">Write a PHP script called "mult_table.php" that generates a multiplication table from $input1 up to $input2 inclusive. Generate the result as an HTML table that includes a table header row along the top and down the leftmost column.</p>
+                            <div class="input-group">
+                                <!-- change the q id value to the question number -->
+                                <label for="q8-i1" class="form-label">Low</label>
+                                <input type="number" id="q8-i1" class="form-control mx-2" value="0.0" min="0">
+                                <label for="q8-i2" class="form-label">High</label>
+                                <input type="number" id="q8-i2" class="form-control mx-2" value="0.0" min="0">
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <!-- change the parameter values to match the q# above -->
+                            <button onclick="runPHP('mult_table.php', '#p8-sol',document.getElementById('q8-i1').value, document.getElementById('q8-i2').value )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">math, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+      
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <!-- change the p id value to the question number -->
+                                <text id="p9-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Even List</h3>
+                            <p class="card-text">
+                                <!-- problem text goes here -->
+                            </p>
+                            <div class="input-group">
+                                <!-- change the q id value to the question number -->
+                                <label for="q9-i1" class="form-label">Low</label>
+                                <input type="number" id="q9-i1" class="form-control mx-2" value="0.0">
+                                <label for="q9-i2" class="form-label">High</label>
+                                <input type="number" id="q9-i2" class="form-control mx-2" value="0.0">
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <!-- change the parameter values to match the q# above -->
+                            <button onclick="runPHP('even_list.php', '#p9-sol',document.getElementById('q9-i1').value, document.getElementById('q9-i2').value )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">math, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+
+                <!-- row 4 -->
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <!-- For each solution copy this block and change the appropriate elements -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <!-- change the p id value to the question number -->
+                                <text id="p10-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Dice Rolling App</h3>
+                            <p class="card-text">When the user loads the page, an AJAX call will happen that asks your PHP program, "dice_roll.php", for 5 "dice" values. These dice are random values, simulating a “roll” of 5 dice with 6 sides each. Your program will output HTML code that the AJAX call will display. Each die roll should be in a separate HTML element (maybe a &lt;div&gt;). Include BootStrap classes in your output to help make it more interesting and appealing.<br>Use rand(1,6) to generate the random integers.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <!-- change the parameter values to match the q# above -->
+                            <button onclick="runPHP('dice_roll.php', '#p10-sol',null, null )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">random numbers</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+   
+
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <!-- change the p id value to the question number -->
+                                <text id="p11-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Fancier Dice</h3>
+                            <p class="card-text">Modify "dice_roll.php" with a new view, and save the result as "fancy_dice.php". In addition to the dice rolling feature of the dice rolling app, change the output so that any of the dice that roll a 1 are shown in red with white text. Have all other dice follow a different colour scheme of your choice. Hint: You may assume that BootStrap will be loaded client side.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <!-- change the parameter values to match the q# above -->
+                            <button onclick="runPHP('fancy_dice.php', '#p11-sol',null, null )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">math, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+      
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <!-- change the p id value to the question number -->
+                                <text id="p12-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Password Generator</h3>
+                            <p class="card-text">Create a PHP page called "password_generate.php" that creates a string containing 5 comma separated temporary passwords, and provides the string back to the AJAX client-side call. The temporary passwords should each be a random mix of upper- and lower-case letters and digits of length 16. (HINT: Use rand for random numbers and the chr function to convert an ASCII code to a string. See http://www.asciitable.com/ for ASCII codes.)</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <!-- change the parameter values to match the q# above -->
+                            <button onclick="runPHP('password_generate.php', '#p12-sol',null, null )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">math, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+
+                <!-- row 5 -->
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <!-- For each solution copy this block and change the appropriate elements -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <!-- change the p id value to the question number -->
+                                <text id="p13-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Day or Night Time</h3>
+                            <p class="card-text">Write a php script called "day_or_night.php" that displays the current time in an &lt;h1&gt; element the format hh:mm:ss. If it’s night, show it in dark color. If it’s daytime, show it in a bright color. Find a sun and a moon image online and display the appropriate image as well. You may assume that bootStrap has been loaded client-side. You will have to research the use of the date function for this.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <!-- change the parameter values to match the q# above -->
+                            <button onclick="runPHP('day_or_night.php', '#p13-sol',null, null )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">time, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+   
+
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>
+                                <!-- change the p id value to the question number -->
+                                <text id="p14-sol" x="50%" y="50%" fill="#eceeef" dy=".3em">Run Solution</text>
+                            </svg>
+    
+                            <div class="card-body">
+                            <h3>Faux Math Library</h3>
+                            <p class="card-text">In this practice exercise you will create a PHP function library to perform basic math operations, such as addition, subtraction, multiplication, and division. You will focus on code reusability and organization by encapsulating each operation in a separate function. Although these functions are very simple, they will give you practice at defining and using code, and separating processing code from creating a specific solution.
+
+                            Create a new PHP file named "math_functions.php" to contain all the functions for math operations. In a second file called "do_math.php" we call the functions and will create some output.
+                                
+                            Define the following functions:
+                                
+                            Function Name: add
+                            Parameters: Two numbers (num1, num2)
+                            Return Value: The sum of num1 and num2
+                                
+                            Function Name: minus
+                            Parameters: Two numbers (num1, num2)
+                            Return Value: The result of subtracting num2 from num1
+                                
+                            Function Name: times
+                            Parameters: Two numbers (num1, num2)
+                            Return Value: The product of num1 and num2
+                                
+                            Function Name: divide
+                            Parameters: Two numbers (num1, num2)
+                            Return Value: The result of dividing num1 by num2
+                            Note: Handle division by zero by returning NAN instead of performing the calculation
+                                
+                            In "do_math.php" include "math_functions.php", perform the following operations using the functions you created and generate a string with an HTML table.
+                            Each row must state the function being called, the inputs, and the result of the function call. If the result is NAN, do not show this to the user, instead create a meaningful message that explains the problem.
+                                
+                            - Calculate the sum of two numbers: 10 and 5.
+                            - Subtract 5 from 10.
+                            - Find the product of 7 and 3.
+                            - Divide 20 by 4.
+                            - Divide 15 by 0.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                            <!-- change the parameter values to match the q# above -->
+                            <button onclick="runPHP('do_math.php', '#p14-sol',null, null )" type="button" class="p-2 btn btn-sm btn-outline-secondary">Run PHP</button>
+                            </div>
+                            <small class="text-muted">math, conditions</small>
+                            </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </main>
+    
+
+
+</body></html>
